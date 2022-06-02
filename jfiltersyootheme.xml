@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+	<name>System - JFilters for YOOtheme Pro</name>
+	<creationDate>February 2022</creationDate>
+	<author>Blue-Coder</author>
+	<copyright>(C) 2022 Blue-Coder</copyright>
+	<license>GNU General Public License version 3, see LICENSE</license>
+	<authorUrl>www.flart.studio</authorUrl>
+	<version>0.0.1</version>
+	<description>JFilters results for YOOtheme Pro builder</description>
+	<namespace path="src">Bluecoder\Plugin\System\JfiltersYootheme</namespace>
+	<files>
+		<filename plugin="jfiltersyootheme">jfiltersyootheme.php</filename>
+		<filename>index.html</filename>
+	</files>
+</extension>
