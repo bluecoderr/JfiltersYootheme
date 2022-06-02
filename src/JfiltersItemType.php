@@ -22,8 +22,6 @@ use YOOtheme\View;
 use function YOOtheme\app;
 use function YOOtheme\trans;
 
-\defined('_JEXEC') or die();
-
 class JfiltersItemType
 {
     /**
@@ -265,7 +263,7 @@ class JfiltersItemType
         $tags = $args['show_taxonomy'] === 'tag' ? ArticleType::tags($article, $args) : null;
 
         return app(View::class)->render(
-            Path::get('../../templates/meta'),
+            Path::get('../../../../templates/yootheme/templates/meta'),
             compact('article', 'tags', 'args')
         );
     }
