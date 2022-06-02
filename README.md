@@ -4,7 +4,7 @@ The plugin makes possible for [Yootheme Pro](https://yootheme.com/page-builder) 
 
 ## Setup 
 1. Install it through the Joomla installer.
-2. Go to **plugins > System**, find the plugin named **JFilters Yootheme** and publish it.
+2. Go to **plugins > System**, find the plugin named **System - JFilters for YOOtheme Pro** and publish it.
 
 After doing that you should be able to customize the JFilters results form Yootheme Pro.
 
