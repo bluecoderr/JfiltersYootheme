@@ -1,4 +1,4 @@
-# JFilters Yootheme Pro Integration
+# JFilters YOOtheme Pro Integration
 
 The plugin makes possible for [Yootheme Pro](https://yootheme.com/page-builder) page builder, to customize the results of [JFilters](https://blue-coder.com/jfilters).
 
