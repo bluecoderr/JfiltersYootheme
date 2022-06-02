@@ -38,7 +38,7 @@ class JfiltersType
 
             'metadata' => [
                 'type' => true,
-                'label' => trans('Results'),
+                'label' => trans('JFilters Results'),
             ],
         ];
     }
