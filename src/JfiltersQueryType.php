@@ -24,7 +24,7 @@ class JfiltersQueryType
                 'jfiltersResults' => [
                     'type' => 'JFiltersResults',
                     'metadata' => [
-                        'label' => trans('JFilters'),
+                        'label' => trans('JFilters Results'),
                         'view' => ['com_jfilters.results'],
                         'group' => 'Page',
                     ],
@@ -38,8 +38,8 @@ class JfiltersQueryType
 
     public static function resolve($root)
     {
-        if (isset($root['results'])) {
-            return $root['results'];
+        if (isset($root['search'])) {
+            return $root['search'];
         }
     }
 }
