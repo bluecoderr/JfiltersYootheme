@@ -263,10 +263,8 @@ class JfiltersItemType
         $space = StringHelper::strpos($full_description, ' ', $start > 0 ? $start - 1 : 0);
         $start = ($space && $space < $pos) ? $space + 1 : $start;
 
-        $description = HTMLHelper::_('string.truncate', StringHelper::substr($full_description, $start), $desc_length,
+        return HTMLHelper::_('string.truncate', StringHelper::substr($full_description, $start), $desc_length,
             true);
-
-        return $description;
     }
 
     /**
