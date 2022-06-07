@@ -23,7 +23,6 @@ class TemplateListener
             return;
         }
 
-        $layout = $view->getLayout();
         $context = $view->get('context');
 
         if ($context === 'com_jfilters.results') {
