@@ -8,6 +8,7 @@
 
 use Bluecoder\Plugin\System\JfiltersYootheme\TemplateListener;
 use Bluecoder\Plugin\System\JfiltersYootheme\SourceListener;
+use YOOtheme\Builder\Joomla\Fields\Type\FieldsType;
 
 return [
     'events' => [
@@ -21,5 +22,15 @@ return [
         'builder.template' => [
             TemplateListener::class => 'matchTemplate',
         ],
-    ]
+    ],
+
+    /*
+     * We need to register that service for the rendering of the custom fields.
+     * Otherwise a ServiceNotFoundException is thrown.
+     */
+    'services' => [
+        'Article.fields' => function () {
+            return new FieldsType('com_content.article');
+        }
+    ],
 ];
