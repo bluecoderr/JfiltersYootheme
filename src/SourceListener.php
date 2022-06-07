@@ -11,8 +11,10 @@ namespace Bluecoder\Plugin\System\JfiltersYootheme;
 \defined('_JEXEC') or die();
 
 use Joomla\CMS\HTML\HTMLHelper;
+use YOOtheme\Builder\Joomla\Fields\FieldsHelper;
 use YOOtheme\Builder\Joomla\Source\UserHelper;
 use YOOtheme\Config;
+use YOOtheme\Builder\Joomla\Fields\Type;
 use function YOOtheme\trans;
 
 class SourceListener
@@ -25,15 +27,27 @@ class SourceListener
         ];
 
         $types = [
-            ['JFiltersResults', JfiltersType::config()],
-            ['JFiltersResultsItem', JfiltersItemType::config()],
+            'JFiltersResults' => ['JFiltersResults', JfiltersType::config()],
+            'JFiltersResultsItem' => ['JFiltersResultsItem', JfiltersItemType::config()],
         ];
+
+        $source->objectType('SqlField', Type\SqlFieldType::config());
+        $source->objectType('ValueField', Type\ValueFieldType::config());
+        $source->objectType('MediaField', Type\MediaFieldType::config());
+        $source->objectType('ChoiceField', Type\ChoiceFieldType::config());
+        $source->objectType('ChoiceFieldString', Type\ChoiceFieldStringType::config());
 
         foreach ($query as $args) {
             $source->queryType($args);
         }
 
-        foreach ($types as $args) {
+        foreach ($types as $key => $args) {
+            if($key == 'JFiltersResultsItem') {
+                $context = 'com_content.article';
+                if ($fields = FieldsHelper::getFields($context)) {
+                    static::configFields($source, $key, $context, $fields);
+                }
+            }
             $source->objectType(...$args);
         }
     }
@@ -100,5 +114,33 @@ class SourceListener
                 ];
             }, HTMLHelper::_('contentlanguage.existing', true, true))
         );
+    }
+
+    protected static function configFields($source, $type, $context, array $fields)
+    {
+        // add field on type
+        $source->objectType(
+            $type,
+            $config = [
+                'fields' => [
+                    'field' => [
+                        'type' => ($fieldType = "{$type}Fields"),
+                        'metadata' => [
+                            'label' => trans('Fields'),
+                        ],
+                        'extensions' => [
+                            'call' => Type\FieldsType::class . '::field',
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        if ($type === 'JFiltersResultsItem') {
+            $source->objectType('TagItem', $config);
+        }
+
+        // configure field type
+        $source->objectType($fieldType, Type\FieldsType::config($source, $type, $context, $fields));
     }
 }
