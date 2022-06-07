@@ -41,7 +41,7 @@ class TemplateListener
                         'searchword' => $query->input ?: '',
                         'total' => $pagination->total,
                     ],
-                    'items' => $view->get('Items'),
+                    'results' => $view->get('Items'),
                     'pagination' => $pagination,
                 ],
             ];

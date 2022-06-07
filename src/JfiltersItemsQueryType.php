@@ -82,8 +82,8 @@ class JfiltersItemsQueryType
             'limit' => null,
         ];
 
-        if (isset($root['items'])) {
-            $items = $root['items'];
+        if (isset($root['results'])) {
+            $items = $root['results'];
 
             if ($args['offset'] || $args['limit']) {
                 $items = array_slice($items, (int) $args['offset'], (int) $args['limit'] ?: null);
