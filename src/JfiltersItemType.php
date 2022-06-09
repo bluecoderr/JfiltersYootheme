@@ -46,9 +46,6 @@ class JfiltersItemType
                         'label' => trans('Content'),
                         'filters' => ['limit'],
                     ],
-                    'extensions' => [
-                        'call' => __CLASS__ . '::description',
-                    ],
                 ],
 
                 'publish_start_date' => [
@@ -225,46 +222,6 @@ class JfiltersItemType
                 'label' => trans('JFilters Results Item'),
             ],
         ];
-    }
-
-    /**
-     * Truncates the description based on the menu item/component setting.
-     *
-     * @param   Result $item
-     * @param   array  $args
-     *
-     * @return mixed
-     * @throws \Exception
-     * @since 1.0.0
-     */
-    public static function description($item, array $args)
-    {
-        $app = Factory::getApplication();
-        $params = $app->getParams();
-        $desc_length = $params->get('description_length', 255);
-        $query = $app->getInput()->get('q');
-        $term_length = StringHelper::strlen($query);
-        $pad_length = $term_length < $desc_length ? (int)floor(($desc_length - $term_length) / 2) : 0;
-
-        // Make sure we highlight term both in introtext and fulltext
-        $full_description = $item->description;
-        if (!empty($item->summary) && !empty($item->body)) {
-            $full_description = Helper::parse($item->summary . $item->body);
-        }
-
-        // Find the position of the search term
-        $pos = $term_length ? StringHelper::strpos(StringHelper::strtolower($full_description),
-            StringHelper::strtolower($query)) : false;
-
-        // Find a potential start point
-        $start = ($pos && $pos > $pad_length) ? $pos - $pad_length : 0;
-
-        // Find a space between $start and $pos, start right after it.
-        $space = StringHelper::strpos($full_description, ' ', $start > 0 ? $start - 1 : 0);
-        $start = ($space && $space < $pos) ? $space + 1 : $start;
-
-        return HTMLHelper::_('string.truncate', StringHelper::substr($full_description, $start), $desc_length,
-            true);
     }
 
     /**
