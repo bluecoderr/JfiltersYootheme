@@ -11,6 +11,8 @@
 	<namespace path="src">Bluecoder\Plugin\System\JfiltersYootheme</namespace>
 	<files>
 		<filename plugin="jfiltersyootheme">jfiltersyootheme.php</filename>
+		<filename>bootstrap.php</filename>
 		<filename>index.html</filename>
+		<folder>src</folder>
 	</files>
 </extension>
