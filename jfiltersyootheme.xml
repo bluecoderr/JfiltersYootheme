@@ -9,10 +9,15 @@
 	<version>1.0.0</version>
 	<description>Integration between JFilters and YOOtheme Pro builder</description>
 	<namespace path="src">Bluecoder\Plugin\System\JfiltersYootheme</namespace>
+	<dlid prefix="dlid=" suffix=""/>
 	<files>
 		<filename plugin="jfiltersyootheme">jfiltersyootheme.php</filename>
 		<filename>bootstrap.php</filename>
 		<filename>index.html</filename>
 		<folder>src</folder>
 	</files>
+	<!-- Update servers -->
+	<updateservers>
+		<server type="extension" priority="1" name="System - JFilters for YOOtheme Pro">https://update.blue-coder.com/streams/jfilters-yootheme/joomla.xml</server>
+	</updateservers>
 </extension>
