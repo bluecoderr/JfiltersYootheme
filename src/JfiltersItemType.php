@@ -15,8 +15,6 @@ use Joomla\CMS\Categories\CategoryNode;
 use Joomla\CMS\Factory;
 use Joomla\CMS\User\User;
 use Joomla\Component\Finder\Administrator\Indexer\Result;
-use Joomla\String\StringHelper;
-use Joomla\CMS\HTML\HTMLHelper;
 use YOOtheme\Builder\Joomla\Source\Type\ArticleType;
 use YOOtheme\Path;
 use YOOtheme\View;
@@ -33,6 +31,13 @@ class JfiltersItemType
     {
         return [
             'fields' => [
+                'id' => [
+                    'type' => 'String',
+                    'metadata' => [
+                        'label' => trans('ID'),
+                        'filters' => ['limit'],
+                    ],
+                ],
                 'title' => [
                     'type' => 'String',
                     'metadata' => [
