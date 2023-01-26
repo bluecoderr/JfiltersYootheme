@@ -12,4 +12,4 @@ After doing that you should be able to customize the JFilters results form Yooth
 [GNU General Public License v.3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 ## Copyright
-Copyright © 2022 [blue-coder.com](https://blue-coder.com/) / Athanasios Terzis
+Copyright © 2023 [blue-coder.com](https://blue-coder.com/) / Athanasios Terzis
