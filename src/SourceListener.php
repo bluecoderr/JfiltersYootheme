@@ -10,6 +10,7 @@ namespace Bluecoder\Plugin\System\JfiltersYootheme;
 
 \defined('_JEXEC') or die();
 
+use Bluecoder\Component\Jfilters\Administrator\Field\MenuitemField;
 use Joomla\CMS\HTML\HTMLHelper;
 use YOOtheme\Builder\Joomla\Fields\FieldsHelper;
 use YOOtheme\Builder\Joomla\Source\UserHelper;
@@ -54,6 +55,23 @@ class SourceListener
 
     public static function initCustomizer(Config $config)
     {
+        // Get the JFilters menu items
+        $jfiltersPckXML = simplexml_load_file(JPATH_ADMINISTRATOR . '/components/com_jfilters/jfilters.xml');
+        $newMenuItemOptions = [
+            trans('All Items') => '',
+        ];
+
+        // We need the menu items, but returns an error below JFilters 1.9.1
+        if ($jfiltersPckXML && $jfiltersPckXML->version && version_compare($jfiltersPckXML->version, '1.9.0', '>')) {
+            $menuItemField = new MenuitemField();
+            $menuItemField->component = 'com_jfilters';
+            $menuItemField->clientId = 0;
+            $menuItemOptions = $menuItemField->getOptions();
+            foreach ($menuItemOptions as $menuItemOption) {
+                $newMenuItemOptions[$menuItemOption->text] = $menuItemOption->value;
+            }
+        }
+
         $languageField = [
             'label' => trans('Limit by Language'),
             'type' => 'select',
@@ -68,6 +86,14 @@ class SourceListener
                 'fieldset' => [
                     'default' => [
                         'fields' => [
+                            'menuitem' => [
+                                'label' => trans('Limit by Menu Item'),
+                                'description' => trans(
+                                    'The template is only assigned to the selected pages.'
+                                ),
+                                'type' => 'select',
+                                'options' => $newMenuItemOptions
+                            ],
                             'lang' => $languageField,
                         ],
                     ],

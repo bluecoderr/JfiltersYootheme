@@ -28,12 +28,14 @@ class TemplateListener
         if ($context === 'com_jfilters.results') {
             $pagination = $view->get('pagination');
             $query = $view->get('query');
+            $menuItemId = isset($view->menuItem) ? $view->menuItem->id : '';
 
             return [
                 'type' => $context,
                 'query' => [
                     'pages' => $pagination->pagesCurrent === 1 ? 'first' : 'except_first',
                     'lang' => $document->language,
+                    'menuitem' => $menuItemId
                 ],
                 'params' => [
                     'search' => [
