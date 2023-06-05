@@ -56,20 +56,20 @@ class SourceListener
     public static function initCustomizer(Config $config)
     {
         // Get the JFilters menu items
-        $jfiltersPckXML = simplexml_load_file(JPATH_ADMINISTRATOR . '/components/com_jfilters/jfilters.xml');
         $newMenuItemOptions = [
             trans('All Items') => '',
         ];
 
-        // We need the menu items, but returns an error below JFilters 1.9.1
-        if ($jfiltersPckXML && $jfiltersPckXML->version && version_compare($jfiltersPckXML->version, '1.9.0', '>')) {
-            $menuItemField = new MenuitemField();
+        // We need the menu items, but getOptions is protected in versions lower to JFilters 1.9.1
+        $menuItemField = new MenuitemField();
+        if (is_callable([$menuItemField, 'getOptions'])) {
             $menuItemField->component = 'com_jfilters';
             $menuItemField->clientId = 0;
             $menuItemOptions = $menuItemField->getOptions();
             foreach ($menuItemOptions as $menuItemOption) {
                 $newMenuItemOptions[$menuItemOption->text] = $menuItemOption->value;
             }
+
         }
 
         $languageField = [
