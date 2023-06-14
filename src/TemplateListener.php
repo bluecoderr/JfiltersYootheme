@@ -17,6 +17,17 @@ use Joomla\CMS\Document\Document;
 
 class TemplateListener
 {
+    /**
+     * Matches the existing (saved) templates with the currently loaded page
+     *
+     * @param   Document  $document
+     * @param   string    $view
+     * @param   string    $tpl
+     *
+     * @compatibility YT3, YT4
+     * @return array|void
+     * @since 1.0.0
+     */
     public static function matchTemplate(Document $document, $view, $tpl)
     {
         if ($tpl) {
