@@ -10,6 +10,10 @@ use Bluecoder\Plugin\System\JfiltersYootheme\TemplateListener;
 use Bluecoder\Plugin\System\JfiltersYootheme\SourceListener;
 use YOOtheme\Builder\Joomla\Fields\Type\FieldsType;
 
+/*
+ * As a guide look at the file: templates/yootheme/vendor/yootheme/theme-joomla-finder/bootstrap.php
+ */
+
 return [
     'events' => [
         'source.init' => [
