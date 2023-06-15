@@ -14,19 +14,22 @@ namespace Bluecoder\Plugin\System\JfiltersYootheme;
 \defined('_JEXEC') or die();
 
 use Joomla\CMS\Document\Document;
+use Joomla\CMS\MVC\View\HtmlView;
 
 class TemplateListener
 {
     /**
-     * Matches the existing (saved) templates with the currently loaded page
+     * Matches the templates with the currently loaded page
      *
      * @param   Document  $document
-     * @param   string    $view
+     * @param   HtmlView  $view
      * @param   string    $tpl
      *
-     * @compatibility YT3, YT4
      * @return array|void
      * @since 1.0.0
+     * @see   /templates/yootheme/vendor/yootheme/builder-joomla-source/src/Listener/LoadTemplate.php
+     *        (executed after the 'builder.template' event is triggered in the handle function
+     * @compatibility YT3, YT4
      */
     public static function matchTemplate(Document $document, $view, $tpl)
     {
@@ -58,5 +61,6 @@ class TemplateListener
                 ],
             ];
         }
+        return null;
     }
 }
