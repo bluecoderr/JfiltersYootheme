@@ -19,9 +19,13 @@ return [
         'source.init' => [
             SourceListener::class => 'initSource',
         ],
-
+        // YT 3 event for initializing the customizer
         'customizer.init' => [
-            SourceListener::class => ['initCustomizer', 10],
+            SourceListener::class => ['initCustomizerYT3', 10],
+        ],
+        // YT 4 event for initializing the customizer
+        'YOOtheme\Builder\BuilderConfig' => [
+            SourceListener::class => ['initCustomizerYT4', 10],
         ],
         'builder.template' => [
             TemplateListener::class => 'matchTemplate',
