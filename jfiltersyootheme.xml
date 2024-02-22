@@ -6,7 +6,7 @@
 	<copyright>(C) 2024 Blue-Coder</copyright>
 	<license>GNU General Public License version 3, see LICENSE</license>
 	<authorUrl>https://Blue-Coder.com</authorUrl>
-	<version>2.1.0</version>
+	<version>2.1.0beta</version>
 	<description>Integration between JFilters and YOOtheme Pro</description>
 	<namespace path="src">Bluecoder\Plugin\System\JfiltersYootheme</namespace>
 	<dlid prefix="dlid=" suffix=""/>
