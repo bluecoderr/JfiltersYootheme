@@ -221,7 +221,11 @@ class SourceListener
                                     'The template is only assigned to the selected pages.'
                                 ),
                                 'type' => 'select',
-                                'options' => $newMenuItemOptions
+                                'options' => $newMenuItemOptions,
+                                'attrs' => [
+                                    'multiple' => true,
+                                    'class' => 'uk-height-small',
+                                ],
                             ],
                             'lang' => $languageField,
                         ],
