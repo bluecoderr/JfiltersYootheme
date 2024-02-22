@@ -48,4 +48,4 @@ But make sure that you check the classes where they are originally called to dec
 
 
 ## Copyright
-Copyright © 2023 [blue-coder.com](https://blue-coder.com/) / Athanasios Terzis
+Copyright © 2024 [blue-coder.com](https://blue-coder.com/) / Athanasios Terzis

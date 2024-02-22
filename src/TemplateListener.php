@@ -5,7 +5,7 @@
  *
  * @package     Bluecoder.JFilters
  *
- * @copyright   Copyright © 2023 Blue-Coder.com. All rights reserved.
+ * @copyright   Copyright © 2024 Blue-Coder.com. All rights reserved.
  * @license     GNU General Public License 2 or later, see COPYING.txt for license details.
  */
 
