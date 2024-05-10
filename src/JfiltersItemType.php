@@ -268,7 +268,7 @@ class JfiltersItemType
         $article->publish_up = $item->publish_start_date;
         $tags = $args['show_taxonomy'] === 'tag' ? ArticleType::tags($article, $args) : null;
         return app(View::class)->render(
-            Path::get('../../../../templates/yootheme/vendor/yootheme/builder-joomla-source/templates/meta'),
+            Path::get('../../../../templates/yootheme/packages/builder-joomla-source/templates/meta'),
             compact('article', 'tags', 'args')
         );
     }
