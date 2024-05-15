@@ -174,9 +174,7 @@ class SourceListener
         }
 
         // Get the JFilters menu items
-        $newMenuItemOptions = [
-            trans('All Items') => '',
-        ];
+        $newMenuItemOptions = [];
 
         // We need the menu items, but getOptions is protected in versions lower to JFilters 1.9.1
         $menuItemField = new MenuitemField();
