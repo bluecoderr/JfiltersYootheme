@@ -11,6 +11,7 @@ namespace Bluecoder\Plugin\System\JfiltersYootheme;
 \defined('_JEXEC') or die();
 
 use Bluecoder\Component\Jfilters\Administrator\Field\MenuitemField;
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use YOOtheme\Builder\BuilderConfig;
 use YOOtheme\Builder\Joomla\Fields\FieldsHelper;
@@ -44,8 +45,15 @@ class SourceListener
         }
 
         foreach ($types as $key => $args) {
-            if($key == 'JFiltersResultsItem') {
+            if ($key == 'JFiltersResultsItem') {
+                // Add custom fields for content
                 $context = 'com_content.article';
+                if ($fields = FieldsHelper::getFields($context)) {
+                    static::configFields($source, $key, $context, $fields);
+                }
+
+                // Add custom fields for contacts
+                $context = 'com_contact.contact';
                 if ($fields = FieldsHelper::getFields($context)) {
                     static::configFields($source, $key, $context, $fields);
                 }
@@ -109,11 +117,12 @@ class SourceListener
     }
 
     /**
-     * Adds the template to the Customizer (YT3)
+     * Adds the template to the Customizer (YT4)
      *
-     * @param   BuilderConfig  $config
-     * @see templates/yootheme/vendor/yootheme/builder-joomla-source/src/Listener/LoadBuilderConfig.php (YT 4.x)
+     * @param BuilderConfig $config
+     * @throws \Exception
      * @since 2.0.0
+     * @see templates/yootheme/vendor/yootheme/builder-joomla-source/src/Listener/LoadBuilderConfig.php (YT 4.x)
      */
     public static function initCustomizerYT4(BuilderConfig $config)
     {
