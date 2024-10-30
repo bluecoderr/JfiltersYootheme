@@ -45,6 +45,9 @@ class SourceListener
         }
 
         foreach ($types as $key => $args) {
+            // Call this before the custom fields' creation. It affects the order of the source list options.
+            $source->objectType(...$args);
+
             if ($key == 'JFiltersResultsItem') {
                 // Add custom fields for content
                 $context = 'com_content.article';
@@ -58,7 +61,6 @@ class SourceListener
                     static::configFields($source, $key, $context, $fields);
                 }
             }
-            $source->objectType(...$args);
         }
     }
 
