@@ -13,8 +13,10 @@ namespace Bluecoder\Plugin\System\JfiltersYootheme;
 use Joomla\CMS\Categories\Categories;
 use Joomla\CMS\Categories\CategoryNode;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\TagsHelper;
 use Joomla\CMS\User\User;
 use Joomla\Component\Finder\Administrator\Indexer\Result;
+use YOOtheme\Builder\Joomla\Source\TagHelper;
 use YOOtheme\Builder\Joomla\Source\Type\ArticleType;
 use YOOtheme\Path;
 use YOOtheme\View;
@@ -184,6 +186,70 @@ class JfiltersItemType
                     ],
                 ],
 
+                'tagString' => [
+                    'type' => 'String',
+                    'args' => [
+                        'parent_id' => [
+                            'type' => 'String',
+                        ],
+                        'separator' => [
+                            'type' => 'String',
+                        ],
+                        'show_link' => [
+                            'type' => 'Boolean',
+                        ],
+                        'link_style' => [
+                            'type' => 'String',
+                        ],
+                    ],
+
+                    'metadata' => [
+                        'label' => trans('Tags'),
+                        'arguments' => [
+                            'parent_id' => [
+                                'label' => trans('Parent Tag'),
+                                'description' => trans(
+                                    'Tags are only loaded from the selected parent tag.',
+                                ),
+                                'type' => 'select',
+                                'default' => '0',
+                                'options' => [
+                                    ['value' => '0', 'text' => trans('Root')],
+                                    ['evaluate' => 'yootheme.builder.tags'],
+                                ],
+                            ],
+                            'separator' => [
+                                'label' => trans('Separator'),
+                                'description' => trans('Set the separator between tags.'),
+                                'default' => ', ',
+                            ],
+                            'show_link' => [
+                                'label' => trans('Link'),
+                                'type' => 'checkbox',
+                                'default' => true,
+                                'text' => trans('Show link'),
+                            ],
+                            'link_style' => [
+                                'label' => trans('Link Style'),
+                                'description' => trans('Set the link style.'),
+                                'type' => 'select',
+                                'default' => '',
+                                'options' => [
+                                    'Default' => '',
+                                    'Muted' => 'link-muted',
+                                    'Text' => 'link-text',
+                                    'Heading' => 'link-heading',
+                                    'Reset' => 'link-reset',
+                                ],
+                                'enable' => 'arguments.show_link',
+                            ],
+                        ],
+                    ],
+                    'extensions' => [
+                        'call' => __CLASS__ . '::tagString',
+                    ],
+                ],
+
                 'images' => [
                     'type' => 'ArticleImages',
                     'metadata' => [
@@ -230,9 +296,57 @@ class JfiltersItemType
     }
 
     /**
+     * Fetches the tags of an item
+     *
      * @param Result $item
+     * @param $args
+     * @return array|mixed
+     * @see \YOOtheme\Builder\Joomla\Source\Type\ArticleType
+     * @since 2.2.0
+     */
+    public static function tags($item, $args)
+    {
+        if (!isset($item->tags)) {
+            $tags = (new TagsHelper())->getItemTags($item->context, $item->id);
+        } else {
+            $tags = $item->tags->itemTags;
+        }
+
+        if (!empty($args['parent_id'])) {
+            return TagHelper::filterTags($tags, $args['parent_id']);
+        }
+
+        return $tags;
+    }
+
+    /**
+     * Prints the tags to the page
+     *
+     * @param Result $item
+     * @param array $args
      *
      * @return string
+     * @see \YOOtheme\Builder\Joomla\Source\Type\ArticleType
+     * @since 2.2.0
+     */
+    public static function tagString($item, array $args)
+    {
+        $tags = static::tags($item, $args);
+        $args += ['separator' => ', ', 'show_link' => true, 'link_style' => ''];
+
+        return app(View::class)->render(
+            Path::get('../../../../templates/yootheme/packages/builder-joomla-source/templates/tags'),
+            compact('tags', 'args'),
+        );
+    }
+
+    /**
+     * @param Result $item
+     * @param array $args
+     *
+     * @return string
+     * @see \YOOtheme\Builder\Joomla\Source\Type\ArticleType
+     * @since 1.0.0
      */
     public static function metaString($item, array $args)
     {
@@ -277,6 +391,7 @@ class JfiltersItemType
      * @param Result $item
      *
      * @return array
+     * @since 1.0.0
      */
     public static function images($item)
     {
@@ -287,6 +402,7 @@ class JfiltersItemType
      * @param Result $item
      *
      * @return CategoryNode|null
+     * @since 1.0.0
      */
     public static function category($item)
     {
@@ -298,6 +414,7 @@ class JfiltersItemType
      * @param Result $item
      *
      * @return User
+     * @since 1.0.0
      */
     public static function author($item)
     {
