@@ -10,6 +10,8 @@ namespace Bluecoder\Plugin\System\JfiltersYootheme;
 
 \defined('_JEXEC') or die();
 
+use Joomla\Component\Finder\Administrator\Indexer\Result;
+
 use function YOOtheme\trans;
 
 class JfiltersItemsQueryType
@@ -21,7 +23,7 @@ class JfiltersItemsQueryType
     {
         return [
             'fields' => [
-                'JFiltersResultsItems' => [
+                'jFiltersResultsItems' => [
                     'type' => [
                         'listOf' => 'JFiltersResultsItem',
                     ],
@@ -36,11 +38,11 @@ class JfiltersItemsQueryType
                     'metadata' => [
                         'label' => trans('JFilters Results Items'),
                         'view' => ['com_jfilters.results'],
-                        'group' => 'Page',
+                        'group' => trans('Page'),
                         'fields' => [
                             '_offset' => [
                                 'description' => trans(
-                                    'Set the starting point and limit the number of items.'
+                                    'Set the starting point and limit the number of items.',
                                 ),
                                 'type' => 'grid',
                                 'width' => '1-2',
@@ -91,5 +93,7 @@ class JfiltersItemsQueryType
 
             return $items;
         }
+
+        return null;
     }
 }

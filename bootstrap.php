@@ -4,32 +4,28 @@
  *
  * @copyright   Copyright © 2024 Blue-Coder.com. All rights reserved.
  * @license     GNU General Public License 2 or later, see COPYING.txt for license details.
+ * @see: templates/yootheme/packages/builder-joomla-source/bootstrap.php
  */
 
-use Bluecoder\Plugin\System\JfiltersYootheme\TemplateListener;
+use Bluecoder\Plugin\System\JfiltersYootheme\LoadBuilderConfig;
+use Bluecoder\Plugin\System\JfiltersYootheme\LoadTemplateUrl;
+use Bluecoder\Plugin\System\JfiltersYootheme\MatchTemplate;
 use Bluecoder\Plugin\System\JfiltersYootheme\SourceListener;
+use YOOtheme\Builder\BuilderConfig;
 use YOOtheme\Builder\Joomla\Fields\Type\FieldsType;
 
-/*
- * As a guide look at the file: templates/yootheme/vendor/yootheme/theme-joomla-finder/bootstrap.php
+/**
+ * @see: templates/yootheme/packages/builder-joomla-source/bootstrap.php
  */
-
 return [
     'events' => [
-        'source.init' => [
-            SourceListener::class => 'initSource',
-        ],
-        // YT 3 event for initializing the customizer
-        'customizer.init' => [
-            SourceListener::class => ['initCustomizerYT3', 10],
-        ],
-        // YT 4 event for initializing the customizer
-        'YOOtheme\Builder\BuilderConfig' => [
-            SourceListener::class => ['initCustomizerYT4', 10],
-        ],
-        'builder.template' => [
-            TemplateListener::class => 'matchTemplate',
-        ],
+        // Declare the Graphp QL query and types
+        'source.init' => [SourceListener::class => 'initSource'],
+        // Match the template inside the customizer
+        'builder.template' => [MatchTemplate::class => '@handle'],
+        'builder.template.load' => [LoadTemplateUrl::class => '@handle'],
+        // YT 4,5 event for initializing the customizer
+        BuilderConfig::class => [LoadBuilderConfig::class => ['handle', 10]],
     ],
 
     /*
