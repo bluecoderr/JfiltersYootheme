@@ -18,18 +18,20 @@ use Joomla\CMS\User\User;
 use Joomla\Component\Finder\Administrator\Indexer\Result;
 use YOOtheme\Builder\Joomla\Source\TagHelper;
 use YOOtheme\Builder\Joomla\Source\Type\ArticleType;
+use YOOtheme\Builder\Joomla\Source\Type\SmartSearchItemType;
 use YOOtheme\Path;
 use YOOtheme\View;
 
 use function YOOtheme\app;
 use function YOOtheme\trans;
 
-class JfiltersItemType
+class JfiltersItemType extends SmartSearchItemType
 {
     /**
      * @return array
+     * @since 1.0.0
      */
-    public static function config()
+    public static function config() : array
     {
         return [
             'fields' => [
@@ -338,93 +340,5 @@ class JfiltersItemType
             Path::get('../../../../templates/yootheme/packages/builder-joomla-source/templates/tags'),
             compact('tags', 'args'),
         );
-    }
-
-    /**
-     * @param Result $item
-     * @param array $args
-     *
-     * @return string
-     * @see \YOOtheme\Builder\Joomla\Source\Type\ArticleType
-     * @since 1.0.0
-     */
-    public static function metaString($item, array $args)
-    {
-        $args += [
-            'format' => 'list',
-            'separator' => '|',
-            'link_style' => '',
-            'show_publish_date' => true,
-            'show_author' => true,
-            'show_taxonomy' => 'category',
-            'date_format' => '',
-        ];
-
-        $props = [
-            'id',
-            'author',
-            'created_by',
-            'created_by_alias',
-            'contact_link',
-            'catid',
-            'category' => 'category_title',
-        ];
-
-        $article = new \stdClass();
-        foreach ($props as $field => $prop) {
-            if (is_numeric($field)) {
-                $article->$prop = $item->getElement($prop);
-            } else {
-                $article->$prop = $item->getElement($field);
-            }
-        }
-
-        $article->publish_up = $item->publish_start_date;
-        $tags = $args['show_taxonomy'] === 'tag' ? ArticleType::tags($article, $args) : null;
-        return app(View::class)->render(
-            Path::get('../../../../templates/yootheme/packages/builder-joomla-source/templates/meta'),
-            compact('article', 'tags', 'args')
-        );
-    }
-
-    /**
-     * @param Result $item
-     *
-     * @return array
-     * @since 1.0.0
-     */
-    public static function images($item)
-    {
-        return json_decode($item->getElement('images'));
-    }
-
-    /**
-     * @param Result $item
-     *
-     * @return CategoryNode|null
-     * @since 1.0.0
-     */
-    public static function category($item)
-    {
-        $id = $item->getElement('catid');
-        return $id ? Categories::getInstance('content', ['countItems' => true])->get($id) : null;
-    }
-
-    /**
-     * @param Result $item
-     *
-     * @return User
-     * @since 1.0.0
-     */
-    public static function author($item)
-    {
-        $user = Factory::getUser($item->getElement('created_by'));
-
-        if ($user && $item->getElement('created_by_alias')) {
-            $user = clone $user;
-            $user->name = $item->getElement('created_by_alias');
-        }
-
-        return $user;
     }
 }
