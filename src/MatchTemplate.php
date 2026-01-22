@@ -46,10 +46,13 @@ class MatchTemplate
      * @compatibility YT4, YT5, YT5
      * @since 1.0.0
      */
-    public function handle($event) : ?array
+    public function handle($event, $tpl = '') : ?array
     {
         //YTP4 passes the `HtmlView` as argument while YTP5 passes `LoadTemplateEvent`
         if ($event instanceof HtmlView) {
+            if ($tpl) {
+                return null;
+            }
             $view = $event;
         } else {
             $view = $event->getView();
