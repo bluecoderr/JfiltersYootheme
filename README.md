@@ -14,7 +14,7 @@ After doing that you should be able to customize the JFilters results form Yooth
 ## Developer Information
 
 ### General Functionality
-YOOtheme uses events massively. The plugin is fetching data to YT based on the triggered event each time.
+YOOtheme uses events. The plugin is fetching data to YT based on the triggered event each time.
 The plugin's *bootstrap.php* declares the function that will be executed in each event triggered from YT.
 Example:
 ```
@@ -30,22 +30,23 @@ But make sure that you check the classes where they are originally called to dec
 ### Plugin declared functions
 1. 
     ```
-    SourceListener::initCustomizerYT3(),
-    SourceListener::initCustomizerYT4()
+    SourceListener::initSource(),
     ```
     These are declaring the JFilters template to the YT customizer (the overall YT page) by adding it to the list of templates.
     As templates here, we mean the type of page that can be build/designed (NOT the already saved templates/pages).
-    Declaring the template properly, has an effect both in finding the proper page (when a new template is created) 
+    Declaring the template properly has an effect both in finding the proper page (when a new template is created) 
     and in matching the already saved templates with the loaded page.
 
 2. 
    ```
-   TemplateListener::matchTemplate()
+   MatchTemplate::handle()
    ```
    + Matches a saved template with the currently loaded page 
    + Also matches the type of the template with the proper one (under pages) when a new YT template is created.
 
 
+### Debug
+Set a breakpoint at: `YOOtheme\Builder\Source\SourceTransform::querySource()`
 
 ## Copyright
-Copyright © 2024 [blue-coder.com](https://blue-coder.com/) / Athanasios Terzis
+Copyright © 2024-2026 [blue-coder.com](https://blue-coder.com/) / Athanasios Terzis
