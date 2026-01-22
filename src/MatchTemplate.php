@@ -48,12 +48,17 @@ class MatchTemplate
      */
     public function handle($event) : ?array
     {
-        if ($event->getTpl()) {
-            return null;
+        //YTP4 passes the `HtmlView` as argument while YTP5 passes `LoadTemplateEvent`
+        if ($event instanceof HtmlView) {
+            $view = $event;
+        } else {
+            $view = $event->getView();
+            if ($event->getTpl()) {
+                return null;
+            }
         }
 
-        $view = $event->getView();
-        $context = $event->getContext();
+        $context = method_exists($event, 'getContext') ? $event->getContext() : $view->get('context');
         /** @var ResultsModel $model */
         $model = $view->getModel();
 
