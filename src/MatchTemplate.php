@@ -1,11 +1,8 @@
 <?php
 /**
- * The TemplateListener class as required by Yootheme Pro.
- * https://yootheme.com/support/yootheme-pro/joomla/developers-templates
- *
  * @package     Bluecoder.JFilters
- *
- * @copyright   Copyright © 2024 Blue-Coder.com. All rights reserved.
+ * https://yootheme.com/support/yootheme-pro/joomla/developers-templates
+ * @copyright   Copyright © 2024 - 2025 Blue-Coder.com. All rights reserved.
  * @license     GNU General Public License 2 or later, see COPYING.txt for license details.
  */
 

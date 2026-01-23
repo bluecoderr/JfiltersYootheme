@@ -1,4 +1,11 @@
 <?php
+/**
+ * @package     Bluecoder.JFilters
+ *
+ * @copyright   Copyright © 2024 - 2025 Blue-Coder.com. All rights reserved.
+ * @license     GNU General Public License 2 or later, see COPYING.txt for license details.
+ * @see: templates/yootheme/packages/builder-joomla-source/bootstrap.php
+ */
 
 namespace Bluecoder\Plugin\System\JfiltersYootheme;
 
