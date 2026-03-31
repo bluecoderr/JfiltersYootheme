@@ -11,6 +11,7 @@ use Bluecoder\Plugin\System\JfiltersYootheme\LoadBuilderConfig;
 use Bluecoder\Plugin\System\JfiltersYootheme\LoadTemplateUrl;
 use Bluecoder\Plugin\System\JfiltersYootheme\MatchTemplate;
 use Bluecoder\Plugin\System\JfiltersYootheme\SourceListener;
+use YOOtheme\Builder;
 use YOOtheme\Builder\BuilderConfig;
 use YOOtheme\Builder\Joomla\Fields\Type\FieldsType;
 
@@ -18,6 +19,11 @@ use YOOtheme\Builder\Joomla\Fields\Type\FieldsType;
  * @see: templates/yootheme/packages/builder-joomla-source/bootstrap.php
  */
 return [
+    'extend' => [
+        Builder::class => static function (Builder $builder): void {
+            $builder->addTypePath(__DIR__ . '/elements/*/element.json');
+        }
+    ],
     'events' => [
         // Declare the Graphp QL query and types
         'source.init' => [SourceListener::class => 'initSource'],
