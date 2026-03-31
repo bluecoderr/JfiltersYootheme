@@ -12,7 +12,6 @@ namespace Bluecoder\Plugin\System\JfiltersYootheme;
 
 use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
 use YOOtheme\Builder\Joomla\Fields\Type;
-use function YOOtheme\trans;
 
 class SourceListener
 {
@@ -67,9 +66,6 @@ class SourceListener
                 'fields' => [
                     'field' => [
                         'type' => ($fieldType = "{$type}Fields"),
-                        'metadata' => [
-                            'label' => trans('Fields'),
-                        ],
                         'extensions' => [
                             'call' => Type\FieldsType::class . '::field',
                         ],
