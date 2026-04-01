@@ -1,6 +1,14 @@
 <?php
+/**
+ * @package     Bluecoder.JFilters
+ *
+ * @copyright   Copyright © 2024 - 2026 Blue-Coder.com. All rights reserved.
+ * @license     GNU General Public License 2 or later, see COPYING.txt for license details.
+ */
 
 namespace YOOtheme;
+
+\defined('_JEXEC') or die();
 
 use Bluecoder\Component\Jfilters\Site\Model\ResultsModel;
 use Joomla\CMS\Factory;

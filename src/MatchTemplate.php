@@ -2,7 +2,7 @@
 /**
  * @package     Bluecoder.JFilters
  * https://yootheme.com/support/yootheme-pro/joomla/developers-templates
- * @copyright   Copyright © 2024 - 2025 Blue-Coder.com. All rights reserved.
+ * @copyright   Copyright © 2024 - 2026 Blue-Coder.com. All rights reserved.
  * @license     GNU General Public License 2 or later, see COPYING.txt for license details.
  */
 
